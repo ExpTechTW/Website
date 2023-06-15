@@ -23,10 +23,67 @@
     <meta name="twitter:description" content="登入管理你的 ExpTech 帳號">
     <meta name="twitter:image"
         content="https://raw.githubusercontent.com/ExpTechTW/ExpTechTW.github.io/master/image/main/ExpTech.jpg">
+    <link rel="stylesheet" href="./css/main.css" />
 </head>
 
-<body>
+<body class="body" style="user-select: none;">
+    <div class="title-box">
+        <div>
+            <div class="title">TREM | 臺灣即時地震監測</div>
+            <div class="subtitle">一款開源地震速報軟體 提供即時的地震資訊<br>利用自製的測站 顯示各地的即時震度</div>
+        </div>
+        <div style="justify-items: center;display: grid;">
+            <div class="download" onclick="download()">下載</div>
+        </div>
+    </div>
+    <div style="display: flex;">
+        <div class="info-box">
+            <img class="info-image" src="./images/image.png" alt="" width="250px" height="200px">
+            <div class="info-text-box">
+                <div class="info-title">震動檢測</div>
+                <div class="info-subtitle">隨時監測地震 並即時通知</div>
+            </div>
+        </div>
+        <div class="info-box">
+            <img class="info-image" src="./images/image1.png" alt="" width="250px" height="200px">
+            <div class="info-text-box">
+                <div class="info-title">強震即時警報</div>
+                <div class="info-subtitle">接收多管道的 強震即時警報</div>
+            </div>
+        </div>
+        <div class="info-box">
+            <img class="info-image" src="./images/image2.png" alt="" width="250px" height="200px">
+            <div class="info-text-box">
+                <div class="info-title">海嘯警報</div>
+                <div class="info-subtitle">顯示海嘯高度及抵達時間</div>
+            </div>
+        </div>
+    </div>
+    <footer style="color: white;">
+        <small>
+            ExpTechTW © 2023
+        </small>
+    </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0/axios.min.js"></script>
+    <script>
+        function download() {
+            axios({
+                url: `https://github.com/ExpTechTW/TREM-Lite/releases/download/1.6.5/TREM-Lite.Setup.1.6.5.exe`,
+                method: 'GET',
+                responseType: 'blob'
+            }).then((res) => {
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(new Blob([res.data]));
+                link.setAttribute('download', `TREM-Lite.Setup.1.6.5.exe`);
+                document.body.appendChild(link);
+                link.click();
+            }).catch((err) => {
+                console.error(err);
+                alert("下載 錯誤!");
+            })
+        }
+    </script>
 </body>
 
 </html>
